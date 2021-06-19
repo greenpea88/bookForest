@@ -1,23 +1,33 @@
 package com.spring.project.bookforest.controller;
 
 import com.spring.project.bookforest.domain.service.UserService;
-import com.spring.project.bookforest.dto.UserInfoDto;
-import com.spring.project.bookforest.dto.UserRegisterReqDto;
-import com.spring.project.bookforest.dto.UserUpdateReqDto;
+import com.spring.project.bookforest.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 @RequiredArgsConstructor
 public class UserController {
 
     private final UserService userService;
 
-    @PostMapping("/register")
+    @PostMapping("/register") //회원가입
     public void userRegister(@RequestBody UserRegisterReqDto requestDto){
         //TODO: response IS_CREATE로 변경하기
+        //TODO: 사용자 존재 여부 확인
+        //TODO: 비밀번호 암호화
         userService.userRegister(requestDto);
+    }
+
+    @PostMapping("/login") //로그인
+    public UserLoginResDto login(@RequestBody UserLoginReqDto reqDto){
+        return userService.login(reqDto);
+    }
+
+    //TODO: 로그아웃
+    public void logout(){
+
     }
 
     @GetMapping("/info")
@@ -38,4 +48,13 @@ public class UserController {
         return userService.verifyToUpdate(email,password);
     }
 
+    @PutMapping("/inc_purchase")
+    public void incPurchase(String email,int price){
+        userService.incPurchase(email,price);
+    }
+
+    @PutMapping("dec_purchase")
+    public void decPurchase(String email,int price){
+        userService.decPurchase(email,price);
+    }
 }

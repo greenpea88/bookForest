@@ -45,4 +45,34 @@ public class User {
         this.createdAt=LocalDateTime.now();
         this.updatedAt=LocalDateTime.now();
     }
+
+    public void updateInfo(String password,String phoneNumber, String addr1, String addr2, String addrCode){
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.addr1 = addr1;
+        this.addr2 = addr2;
+        this.addrCode = addrCode;
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    public void userClass(){
+        switch ((int)this.purchaseAmount/100000){
+            case 0:
+                this.uClass = "WELCOME";
+                break;
+            case 1:
+                this.uClass = "SILVER";
+                break;
+            case 2:
+                this.uClass = "GOLD";
+                break;
+            case 3:
+                this.uClass = "VIP";
+                break;
+            default:
+                this.uClass = "VVIP";
+                break;
+        }
+        this.updatedAt = LocalDateTime.now();
+    }
 }

@@ -1,5 +1,6 @@
 package com.spring.project.bookforest.domain.service;
 
+import com.spring.project.bookforest.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -7,5 +8,5 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ProductService {
 
-    private final ProductService productService;
+    private final ProductRepository productRepository;
 }
