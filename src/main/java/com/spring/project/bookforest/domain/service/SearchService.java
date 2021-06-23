@@ -1,10 +1,11 @@
 package com.spring.project.bookforest.domain.service;
 
 import com.spring.project.bookforest.domain.entity.Product;
-import com.spring.project.bookforest.dto.ProductSearchResDto;
+import com.spring.project.bookforest.dto.ProductResDto;
 import com.spring.project.bookforest.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,40 +18,35 @@ public class SearchService {
 
     private final ProductRepository productRepository;
 
-    public List<ProductSearchResDto> searchProduct(String keyword, String sorting){
+    public List<ProductResDto> searchProduct(String keyword, String sorting, int page){
         //product name과 category에서 keyword 모두 검색
-        List<Product> result_name = new ArrayList<>();
-        List<Product> result_category = new ArrayList<>();
+        List<Product> result = new ArrayList<>();
+        //page는 0이 1페이지
+        PageRequest pageRequest = PageRequest.of(page,10);
         switch (sorting){
             case "recent":
-                productRepository.findAllByNameContainingOrderByUpdatedAtAsc(keyword);
-                productRepository.findAllByCategoryContainingOrderByUpdatedAtAsc(keyword);
+                result = productRepository.findAllByNameContainingOrCategoryContainingOrderByUpdatedAtAsc(pageRequest,keyword);
                 break;
             case "old":
-                productRepository.findAllByNameContainingOrderByUpdatedAtDesc(keyword);
-                productRepository.findAllByCategoryContainingOrderByUpdatedAtDesc(keyword);
+                result = productRepository.findAllByNameContainingOrCategoryContainingOrderByUpdatedAtDesc(pageRequest, keyword);
                 break;
             case "rate":
-                productRepository.findAllByNameContainingOrderByRateDesc(keyword);
-                productRepository.findAllByCategoryContainingOrderByRateDesc(keyword);
+                result = productRepository.findAllByNameContainingOrCategoryContainingOrderByRateDesc(pageRequest, keyword);
                 break;
             case "review":
-                productRepository.findAllByNameContainingOrderByReviewCntDesc(keyword);
-                productRepository.findAllByCategoryContainingOrderByReviewCntDesc(keyword);
+                result = productRepository.findAllByNameContainingOrCategoryContainingOrderByReviewCntDesc(pageRequest,keyword);
                 break;
 
         }
-        List<ProductSearchResDto> resDtoList = new ArrayList<>();
-        for (Product r: result_name){
-            resDtoList.add(entityToDto(r));
-        }
-        for (Product r: result_category){
+        List<ProductResDto> resDtoList = new ArrayList<>();
+        for (Product r: result){
             resDtoList.add(entityToDto(r));
         }
         return resDtoList;
    }
 
-   private ProductSearchResDto entityToDto(Product product){
-        return new ProductSearchResDto(product.getPId(),product.getName(),product.getPicSrc(),product.getPrice(),product.getRate(),product.getReviewCnt());
+   private ProductResDto entityToDto(Product product){
+        return new ProductResDto(product.getPId(),product.getName(),product.getPicSrc()
+                ,product.getPrice(),product.getRate(),product.getReviewCnt(),product.getCategory());
    }
 }

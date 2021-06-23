@@ -1,4 +1,4 @@
-package com.spring.project.bookforest.controller;
+package com.spring.project.bookforest.controller.api;
 
 import com.spring.project.bookforest.domain.service.UserService;
 import com.spring.project.bookforest.dto.*;

@@ -21,7 +21,7 @@ public class User {
     private String password;
     private String phoneNumber;
     private String uClass = "WELCOME";
-    private int purchaseAmount;
+    private int purchaseAmount = 0;
 
     private String addr1;
     private String addr2;

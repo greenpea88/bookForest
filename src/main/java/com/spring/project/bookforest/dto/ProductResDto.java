@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductSearchResDto {
+public class ProductResDto {
 
     private Long pId;
     private String name;
@@ -15,4 +15,5 @@ public class ProductSearchResDto {
     private int price;
     private float rate;
     private int reviewCnt;
+    private String category;
 }

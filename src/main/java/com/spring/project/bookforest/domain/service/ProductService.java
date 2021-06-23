@@ -1,10 +1,15 @@
 package com.spring.project.bookforest.domain.service;
 
 import com.spring.project.bookforest.domain.entity.Product;
+import com.spring.project.bookforest.dto.ProductResDto;
 import com.spring.project.bookforest.dto.ProductUploadReqDto;
 import com.spring.project.bookforest.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -34,5 +39,20 @@ public class ProductService {
                 ,product.getStock(),product.getProductDetail());
 
         productRepository.save(modify);
+    }
+
+    public List<ProductResDto> getProductList(int page){
+        PageRequest pageRequest = PageRequest.of(page,10);
+        List<ProductResDto> resDtoList = new ArrayList<>();
+        List<Product> result = productRepository.findAllByOrderByUpdatedAtAsc(pageRequest);
+        for (Product r: result){
+            resDtoList.add(entityToDto(r));
+        }
+        return resDtoList;
+    }
+
+    private ProductResDto entityToDto(Product product){
+        return new ProductResDto(product.getPId(),product.getName(),product.getPicSrc()
+                ,product.getPrice(),product.getRate(),product.getReviewCnt(),product.getCategory());
     }
 }
