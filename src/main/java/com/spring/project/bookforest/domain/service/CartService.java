@@ -3,11 +3,14 @@ package com.spring.project.bookforest.domain.service;
 import com.spring.project.bookforest.domain.entity.Cart;
 import com.spring.project.bookforest.domain.entity.Product;
 import com.spring.project.bookforest.domain.entity.User;
+import com.spring.project.bookforest.dto.CartResDto;
 import com.spring.project.bookforest.repository.CartRepository;
 import com.spring.project.bookforest.repository.ProductRepository;
 import com.spring.project.bookforest.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -26,4 +29,8 @@ public class CartService {
         System.out.println(cart);
         cartRepository.save(Cart.builder().user(user).product(product).num(num).build());
     }
+
+//    public List<CartResDto> getCartList(int page){
+//
+//    }
 }

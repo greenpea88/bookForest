@@ -6,7 +6,9 @@ import com.spring.project.bookforest.dto.ProductUpdateReqDto;
 import com.spring.project.bookforest.dto.ProductUploadReqDto;
 import com.spring.project.bookforest.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -44,9 +46,9 @@ public class ProductService {
     }
 
     public List<ProductResDto> getProductList(int page){
-        PageRequest pageRequest = PageRequest.of(page,10);
+        PageRequest pageRequest = PageRequest.of(page,10,Sort.by(Sort.Direction.ASC,"updatedAt"));
         List<ProductResDto> resDtoList = new ArrayList<>();
-        List<Product> result = productRepository.findAllByOrderByUpdatedAtAsc(pageRequest);
+        Page<Product> result = productRepository.findAll(pageRequest);
         for (Product r: result){
             resDtoList.add(entityToDto(r));
         }

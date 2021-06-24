@@ -8,8 +8,6 @@ import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
-    List<Product> findAllByOrderByUpdatedAtAsc(PageRequest page);
-
     List<Product> findAllByNameContainingOrCategoryContainingOrderByUpdatedAtAsc(PageRequest page, String keyword);
 
     List<Product> findAllByNameContainingOrCategoryContainingOrderByUpdatedAtDesc(PageRequest page, String keyword);
