@@ -2,6 +2,7 @@ package com.spring.project.bookforest.domain.service;
 
 import com.spring.project.bookforest.domain.entity.Product;
 import com.spring.project.bookforest.dto.ProductResDto;
+import com.spring.project.bookforest.dto.ProductUpdateReqDto;
 import com.spring.project.bookforest.dto.ProductUploadReqDto;
 import com.spring.project.bookforest.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -32,11 +33,12 @@ public class ProductService {
     }
 
     //물건 정보 수정
-    public void updateProduct(Product product){
-        Product modify = productRepository.findById(product.getPId()).orElse(null);
-        modify.update(product.getName(),product.getPicSrc(),product.getPrice()
-                ,product.getDeliveryPrice(), product.getDiscountRate(),product.getCategory()
-                ,product.getStock(),product.getProductDetail());
+    public void updateProduct(ProductUpdateReqDto reqDto){
+//        System.out.println(reqDto);
+        Product modify = productRepository.findById(reqDto.getId()).orElse(null);
+        modify.update(reqDto.getName(),reqDto.getPicSrc(),reqDto.getPrice()
+                ,reqDto.getDeliveryPrice(), reqDto.getDiscountRate(),reqDto.getCategory()
+                ,reqDto.getStock(),reqDto.getProductDetail());
 
         productRepository.save(modify);
     }
