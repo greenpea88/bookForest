@@ -25,7 +25,7 @@ public class CartController {
 
     //장바구니 리스트 불러오기
     @GetMapping("/get_cart_list")
-    public void getCartList(@RequestParam int page){
+    public void getCartList(@RequestParam String email, @RequestParam int page){
 
     }
 

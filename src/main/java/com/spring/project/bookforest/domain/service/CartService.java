@@ -8,8 +8,11 @@ import com.spring.project.bookforest.repository.CartRepository;
 import com.spring.project.bookforest.repository.ProductRepository;
 import com.spring.project.bookforest.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -30,7 +33,18 @@ public class CartService {
         cartRepository.save(Cart.builder().user(user).product(product).num(num).build());
     }
 
-//    public List<CartResDto> getCartList(int page){
-//
-//    }
+    public List<CartResDto> getCartList(String email, int page){
+        PageRequest pageRequest = PageRequest.of(page,10);
+        List<Cart> result = cartRepository.findAllByUserEmail(pageRequest,email);
+
+        List<CartResDto> cartResDtoList = new ArrayList<>();
+        for (Cart r: result){
+            cartResDtoList.add(entityToDto(r));
+        }
+        return cartResDtoList;
+    }
+
+    private CartResDto entityToDto(Cart cart){
+        return new CartResDto(cart.getProduct().getName(),cart.getProduct().getPicSrc(),cart.getNum());
+    }
 }
