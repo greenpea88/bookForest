@@ -24,10 +24,10 @@ public class Review {
     private LocalDateTime updatedAt;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "ur_email")
+    @JoinColumn(name = "user_email")
     private User user;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "p_id")
+    @JoinColumn(name = "product_id")
     private Product product;
 }

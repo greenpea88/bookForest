@@ -1,6 +1,7 @@
 package com.spring.project.bookforest.domain.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -22,6 +23,13 @@ public class Cart {
     private Product product;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "uc_email")
+    @JoinColumn(name = "u_email")
     private User user;
+
+    @Builder
+    public Cart(User user, Product product,int num){
+        this.user = user;
+        this.product = product;
+        this.num = num;
+    }
 }
