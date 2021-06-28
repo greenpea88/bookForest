@@ -9,7 +9,6 @@ import com.spring.project.bookforest.repository.ProductRepository;
 import com.spring.project.bookforest.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -42,6 +41,10 @@ public class CartService {
             cartResDtoList.add(entityToDto(r));
         }
         return cartResDtoList;
+    }
+
+    public void deleteFromCart(Long pId){
+        Cart cart = cartRepository.getById(pId);
     }
 
     private CartResDto entityToDto(Cart cart){
