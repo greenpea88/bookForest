@@ -23,13 +23,21 @@ public class CartService {
     private final ProductRepository productRepository;
 
     public void putCart(String email, Long pId, int num){
-        User user = userRepository.findByEmail(email);
-        System.out.println(user);
         //TODO: 존재하지 않는 물건일 경우 예외처리
-        Product product = productRepository.findById(pId).orElse(null);
-        Cart cart = Cart.builder().user(user).product(product).num(num).build();
-        System.out.println(cart);
-        cartRepository.save(Cart.builder().user(user).product(product).num(num).build());
+        //TODO: 이미 담겨있는 상품인지 확인 필요
+        Cart cart;
+        if(cartRepository.countByProductPId(pId)==0){
+            //cart에 존재하지 않는 상품
+            User user = userRepository.findByEmail(email);
+            Product product = productRepository.findById(pId).orElse(null);
+            cart = Cart.builder().user(user).product(product).num(num).build();
+        }
+        else{
+            //cart에 이미 존재하는 상품
+            cart = cartRepository.findByProductPid(pId);
+            cart.setNum(cart.getNum()+num);
+        }
+        cartRepository.save(cart);
     }
 
     public List<CartResDto> getCartList(String email, int page){
@@ -48,6 +56,6 @@ public class CartService {
     }
 
     private CartResDto entityToDto(Cart cart){
-        return new CartResDto(cart.getProduct().getName(),cart.getProduct().getPicSrc(),cart.getNum());
+        return new CartResDto(cart.getProduct().getPId(), cart.getProduct().getName(),cart.getProduct().getPicSrc(),cart.getNum());
     }
 }

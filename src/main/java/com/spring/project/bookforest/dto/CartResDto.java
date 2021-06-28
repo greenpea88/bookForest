@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CartResDto {
 
+    private Long pId;
     private String productName;
     private String productPicSrc;
     private int num;

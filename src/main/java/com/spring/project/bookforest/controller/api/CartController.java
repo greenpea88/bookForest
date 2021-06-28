@@ -17,7 +17,6 @@ public class CartController {
     //장바구니 담기
     @PostMapping("/put_product")
     public void putProduct(@RequestParam String email, @RequestParam Long pId, @RequestParam int num){
-        //TODO: 이미 담겨있는 상품인지 확인 필요
         cartService.putCart(email,pId,num);
     }
 
