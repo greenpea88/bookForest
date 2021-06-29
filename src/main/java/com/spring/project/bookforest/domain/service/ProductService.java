@@ -56,7 +56,7 @@ public class ProductService {
     }
 
     private ProductResDto entityToDto(Product product){
-        return new ProductResDto(product.getPId(),product.getName(),product.getPicSrc()
+        return new ProductResDto(product.getId(),product.getName(),product.getPicSrc()
                 ,product.getPrice(),product.getRate(),product.getReviewCnt(),product.getCategory());
     }
 }

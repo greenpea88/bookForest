@@ -1,8 +1,6 @@
 package com.spring.project.bookforest.domain.service;
 
 import com.spring.project.bookforest.domain.entity.Cart;
-import com.spring.project.bookforest.domain.entity.Product;
-import com.spring.project.bookforest.domain.entity.User;
 import com.spring.project.bookforest.dto.CartResDto;
 import com.spring.project.bookforest.repository.CartRepository;
 import com.spring.project.bookforest.repository.ProductRepository;
@@ -43,7 +41,6 @@ public class CartService {
     public List<CartResDto> getCartList(String email, int page){
         PageRequest pageRequest = PageRequest.of(page,10);
         List<Cart> result = cartRepository.findAllByUserEmail(pageRequest,email);
-//        List<Cart> result = cartRepository.findAllByUserEmail(email);
 
         List<CartResDto> cartResDtoList = new ArrayList<>();
         for (Cart r: result){
@@ -56,7 +53,7 @@ public class CartService {
     }
 
     private CartResDto entityToDto(Cart cart){
-        return new CartResDto(cart.getProduct().getPId(), cart.getProduct().getName()
+        return new CartResDto(cart.getProduct().getId(), cart.getProduct().getName()
                 ,cart.getProduct().getPicSrc(),cart.getNum());
     }
 }

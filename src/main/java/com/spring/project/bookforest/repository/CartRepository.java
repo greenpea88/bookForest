@@ -10,5 +10,5 @@ import java.util.List;
 public interface CartRepository extends JpaRepository<Cart, Long> {
 
     List<Cart> findAllByUserEmail(Pageable page, String email);
-//    List<Cart> findAllByUserEmailAndProductPId(String email, Long pId);
+    List<Cart> findAllByUserEmailAndProductId(String email, Long pId);
 }

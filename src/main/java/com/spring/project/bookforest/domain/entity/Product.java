@@ -17,7 +17,7 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long pId;
+    private Long id;
 
     private String name;
     private String picSrc;
@@ -40,7 +40,7 @@ public class Product {
         this.picSrc = picSrc;
         this.price = price;
         this.deliveryPrice = deliveryPrice;
-        this. discountRate = discountRate;
+        this.discountRate = discountRate;
         this.category = category;
         this.stock = stock;
         this.productDetail = productDetail;
