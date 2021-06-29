@@ -25,24 +25,25 @@ public class CartService {
     public void putCart(String email, Long pId, int num){
         //TODO: 존재하지 않는 물건일 경우 예외처리
         //TODO: 이미 담겨있는 상품인지 확인 필요
-        Cart cart;
-        if(cartRepository.countByProductPId(pId)==0){
-            //cart에 존재하지 않는 상품
-            User user = userRepository.findByEmail(email);
-            Product product = productRepository.findById(pId).orElse(null);
-            cart = Cart.builder().user(user).product(product).num(num).build();
-        }
-        else{
-            //cart에 이미 존재하는 상품
-            cart = cartRepository.findByProductPid(pId);
-            cart.setNum(cart.getNum()+num);
-        }
-        cartRepository.save(cart);
+//        Cart cart;
+//        if(cartRepository.countByProductPId(pId)==0){
+//            //cart에 존재하지 않는 상품
+//            User user = userRepository.findByEmail(email);
+//            Product product = productRepository.findById(pId).orElse(null);
+//            cart = Cart.builder().user(user).product(product).num(num).build();
+//        }
+//        else{
+//            //cart에 이미 존재하는 상품
+//            cart = cartRepository.findByProductPId(pId);
+//            cart.setNum(cart.getNum()+num);
+//        }
+//        cartRepository.save(cart);
     }
 
     public List<CartResDto> getCartList(String email, int page){
         PageRequest pageRequest = PageRequest.of(page,10);
         List<Cart> result = cartRepository.findAllByUserEmail(pageRequest,email);
+//        List<Cart> result = cartRepository.findAllByUserEmail(email);
 
         List<CartResDto> cartResDtoList = new ArrayList<>();
         for (Cart r: result){
@@ -52,10 +53,10 @@ public class CartService {
     }
 
     public void deleteFromCart(Long pId){
-        Cart cart = cartRepository.getById(pId);
     }
 
     private CartResDto entityToDto(Cart cart){
-        return new CartResDto(cart.getProduct().getPId(), cart.getProduct().getName(),cart.getProduct().getPicSrc(),cart.getNum());
+        return new CartResDto(cart.getProduct().getPId(), cart.getProduct().getName()
+                ,cart.getProduct().getPicSrc(),cart.getNum());
     }
 }
