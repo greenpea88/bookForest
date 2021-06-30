@@ -1,6 +1,8 @@
 package com.spring.project.bookforest.domain.service;
 
 import com.spring.project.bookforest.domain.entity.Cart;
+import com.spring.project.bookforest.domain.entity.Product;
+import com.spring.project.bookforest.domain.entity.User;
 import com.spring.project.bookforest.dto.CartResDto;
 import com.spring.project.bookforest.repository.CartRepository;
 import com.spring.project.bookforest.repository.ProductRepository;
@@ -23,19 +25,20 @@ public class CartService {
     public void putCart(String email, Long pId, int num){
         //TODO: 존재하지 않는 물건일 경우 예외처리
         //TODO: 이미 담겨있는 상품인지 확인 필요
-//        Cart cart;
-//        if(cartRepository.countByProductPId(pId)==0){
-//            //cart에 존재하지 않는 상품
-//            User user = userRepository.findByEmail(email);
-//            Product product = productRepository.findById(pId).orElse(null);
-//            cart = Cart.builder().user(user).product(product).num(num).build();
-//        }
-//        else{
-//            //cart에 이미 존재하는 상품
-//            cart = cartRepository.findByProductPId(pId);
-//            cart.setNum(cart.getNum()+num);
-//        }
-//        cartRepository.save(cart);
+        Cart cart;
+        List<Cart> result = cartRepository.findAllByUserEmailAndProductId(email,pId);
+        if(result == null){
+            //cart에 존재하지 않는 상품
+            User user = userRepository.findByEmail(email);
+            Product product = productRepository.findById(pId).orElse(null);
+            cart = Cart.builder().user(user).product(product).num(num).build();
+        }
+        else{
+            //cart에 이미 존재하는 상품
+            cart = result.get(0); //pid가 같은 상품은 email당 한 개만 존재
+            cart.setNum(cart.getNum()+num);
+        }
+        cartRepository.save(cart);
     }
 
     public List<CartResDto> getCartList(String email, int page){
