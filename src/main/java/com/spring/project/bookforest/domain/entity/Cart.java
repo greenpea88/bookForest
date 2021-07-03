@@ -18,6 +18,9 @@ public class Cart {
 
     private int num;
 
+    @Column(columnDefinition = "TINYINT")
+    private boolean deleted = false;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "p_id")
     private Product product;

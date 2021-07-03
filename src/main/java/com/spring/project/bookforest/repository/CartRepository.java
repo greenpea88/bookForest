@@ -8,7 +8,6 @@ import java.util.List;
 
 public interface CartRepository extends JpaRepository<Cart, Long> {
 
-    List<Cart> findAllByUserEmail(Pageable page, String email);
+    List<Cart> findAllByUserEmailAndDeletedFalse(Pageable page, String email);
     List<Cart> findAllByUserEmailAndProductId(String email, Long pId);
-    void deleteById(Long cId);
 }

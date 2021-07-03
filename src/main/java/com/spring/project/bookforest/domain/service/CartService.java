@@ -42,7 +42,7 @@ public class CartService {
 
     public List<CartResDto> getCartList(String email, int page){
         PageRequest pageRequest = PageRequest.of(page,10);
-        List<Cart> result = cartRepository.findAllByUserEmail(pageRequest,email);
+        List<Cart> result = cartRepository.findAllByUserEmailAndDeletedFalse(pageRequest,email);
 
         List<CartResDto> cartResDtoList = new ArrayList<>();
         for (Cart r: result){
@@ -54,7 +54,9 @@ public class CartService {
     public void deleteFromCart(Long cId){
 //        List<Cart> deleteCart = cartRepository.findAllByUserEmailAndProductId(email,pId);
 //        cartRepository.deleteByCId(deleteCart.get(0).getCId());
-        cartRepository.deleteById(cId);
+        Cart cart = cartRepository.getById(cId);
+        cart.setDeleted(true);
+        cartRepository.save(cart);
     }
 
     public void modifyCartNum(Long cId, int num){
