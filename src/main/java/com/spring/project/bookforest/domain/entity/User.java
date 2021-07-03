@@ -33,7 +33,7 @@ public class User {
     private LocalDateTime updatedAt;
 
     @Column(columnDefinition = "TINYINT")
-    private int deactivate = 0;
+    private boolean deactivate = false;
 
     @Builder
     public User(String email, String name, String password,String phoneNumber){
