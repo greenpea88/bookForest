@@ -34,7 +34,7 @@ public class CartController {
 
     //담은 물건 수량 변경
     @PutMapping("/modify_num")
-    public void modifyProductNum(@RequestParam Long pId, @RequestParam int num){
-
+    public void modifyProductNum(@RequestParam Long cId, @RequestParam int num){
+        cartService.modifyCartNum(cId,num);
     }
 }

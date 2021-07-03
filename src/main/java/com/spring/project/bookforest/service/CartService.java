@@ -60,7 +60,9 @@ public class CartService {
     }
 
     public void modifyCartNum(Long cId, int num){
-
+        Cart cart = cartRepository.getById(cId);
+        cart.setNum(num);
+        cartRepository.save(cart);
     }
 
     private CartResDto entityToDto(Cart cart){
