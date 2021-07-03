@@ -26,7 +26,7 @@ public class CartService {
         //TODO: 존재하지 않는 물건일 경우 예외처리
         Cart cart;
         List<Cart> result = cartRepository.findAllByUserEmailAndProductId(email,pId);
-        if(result == null){
+        if(result.isEmpty()){
             //cart에 존재하지 않는 상품
             User user = userRepository.findByEmail(email);
             Product product = productRepository.findById(pId).orElse(null);
@@ -54,7 +54,7 @@ public class CartService {
     public void deleteFromCart(Long cId){
 //        List<Cart> deleteCart = cartRepository.findAllByUserEmailAndProductId(email,pId);
 //        cartRepository.deleteByCId(deleteCart.get(0).getCId());
-        cartRepository.deleteByCId(cId);
+        cartRepository.deleteById(cId);
     }
 
     public void modifyCartNum(Long cId, int num){
