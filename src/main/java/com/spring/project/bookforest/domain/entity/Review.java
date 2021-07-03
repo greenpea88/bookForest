@@ -15,13 +15,16 @@ public class Review {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long r_id;
+    private Long id;
 
     private String title;
     private int rate;
     private String content;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    private LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDateTime updatedAt = LocalDateTime.now();
+
+    @Column(columnDefinition = "TINYINT")
+    private boolean deleted = false;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_email")
