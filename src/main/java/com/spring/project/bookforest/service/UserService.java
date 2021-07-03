@@ -1,8 +1,8 @@
-package com.spring.project.bookforest.domain.service;
+package com.spring.project.bookforest.service;
 
 import com.spring.project.bookforest.domain.entity.User;
 import com.spring.project.bookforest.dto.*;
-import com.spring.project.bookforest.repository.UserRepository;
+import com.spring.project.bookforest.domain.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.spring.project.bookforest.repository;
+package com.spring.project.bookforest.domain.repository;
 
 import com.spring.project.bookforest.domain.entity.Product;
 import org.springframework.data.domain.PageRequest;

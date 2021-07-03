@@ -1,6 +1,6 @@
 package com.spring.project.bookforest.controller.api;
 
-import com.spring.project.bookforest.domain.service.SearchService;
+import com.spring.project.bookforest.service.SearchService;
 import com.spring.project.bookforest.dto.ProductResDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

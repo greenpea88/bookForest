@@ -1,10 +1,10 @@
-package com.spring.project.bookforest.domain.service;
+package com.spring.project.bookforest.service;
 
 import com.spring.project.bookforest.domain.entity.Product;
 import com.spring.project.bookforest.dto.ProductResDto;
 import com.spring.project.bookforest.dto.ProductUpdateReqDto;
 import com.spring.project.bookforest.dto.ProductUploadReqDto;
-import com.spring.project.bookforest.repository.ProductRepository;
+import com.spring.project.bookforest.domain.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

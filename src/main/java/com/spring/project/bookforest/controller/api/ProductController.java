@@ -1,7 +1,6 @@
 package com.spring.project.bookforest.controller.api;
 
-import com.spring.project.bookforest.domain.entity.Product;
-import com.spring.project.bookforest.domain.service.ProductService;
+import com.spring.project.bookforest.service.ProductService;
 import com.spring.project.bookforest.dto.ProductResDto;
 import com.spring.project.bookforest.dto.ProductUpdateReqDto;
 import com.spring.project.bookforest.dto.ProductUploadReqDto;

@@ -1,6 +1,6 @@
 package com.spring.project.bookforest.controller.api;
 
-import com.spring.project.bookforest.domain.service.CartService;
+import com.spring.project.bookforest.service.CartService;
 import com.spring.project.bookforest.dto.CartResDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

@@ -1,12 +1,12 @@
-package com.spring.project.bookforest.domain.service;
+package com.spring.project.bookforest.service;
 
 import com.spring.project.bookforest.domain.entity.Cart;
 import com.spring.project.bookforest.domain.entity.Product;
 import com.spring.project.bookforest.domain.entity.User;
 import com.spring.project.bookforest.dto.CartResDto;
-import com.spring.project.bookforest.repository.CartRepository;
-import com.spring.project.bookforest.repository.ProductRepository;
-import com.spring.project.bookforest.repository.UserRepository;
+import com.spring.project.bookforest.domain.repository.CartRepository;
+import com.spring.project.bookforest.domain.repository.ProductRepository;
+import com.spring.project.bookforest.domain.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
