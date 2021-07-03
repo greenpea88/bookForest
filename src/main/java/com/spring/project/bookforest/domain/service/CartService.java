@@ -24,7 +24,6 @@ public class CartService {
 
     public void putCart(String email, Long pId, int num){
         //TODO: 존재하지 않는 물건일 경우 예외처리
-        //TODO: 이미 담겨있는 상품인지 확인 필요
         Cart cart;
         List<Cart> result = cartRepository.findAllByUserEmailAndProductId(email,pId);
         if(result == null){
@@ -52,7 +51,14 @@ public class CartService {
         return cartResDtoList;
     }
 
-    public void deleteFromCart(Long pId){
+    public void deleteFromCart(Long cId){
+//        List<Cart> deleteCart = cartRepository.findAllByUserEmailAndProductId(email,pId);
+//        cartRepository.deleteByCId(deleteCart.get(0).getCId());
+        cartRepository.deleteByCId(cId);
+    }
+
+    public void modifyCartNum(Long cId, int num){
+
     }
 
     private CartResDto entityToDto(Cart cart){

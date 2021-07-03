@@ -22,8 +22,8 @@ public class CartController {
 
     //장바구니 빼기
     @DeleteMapping("/delete_product")
-    public void deleteProduct(@RequestParam Long pId){
-        cartService.deleteFromCart(pId);
+    public void deleteProduct(@RequestParam Long cId){
+        cartService.deleteFromCart(cId);
     }
 
     //장바구니 리스트 불러오기
