@@ -6,10 +6,15 @@ import com.spring.project.bookforest.domain.entity.User;
 import com.spring.project.bookforest.domain.repository.ProductRepository;
 import com.spring.project.bookforest.domain.repository.ReviewRepository;
 import com.spring.project.bookforest.domain.repository.UserRepository;
+import com.spring.project.bookforest.dto.ReviewUserResDto;
 import com.spring.project.bookforest.dto.ReviewUpdateReqDto;
 import com.spring.project.bookforest.dto.ReviewWriteReqDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -40,5 +45,21 @@ public class ReviewService {
         review.setDeleted(true);
 
         reviewRepository.save(review);
+    }
+
+    public List<ReviewUserResDto> getReviewUserList(int page, String email){
+        PageRequest pageRequest = PageRequest.of(page,10);
+        List<Review> result = reviewRepository.findAllByUserEmailAndDeletedFalse(pageRequest, email);
+
+        List<ReviewUserResDto> reviewUserResDtoList = new ArrayList<>();
+        for (Review r: result){
+            reviewUserResDtoList.add(entityToUserDto(r));
+        }
+        return reviewUserResDtoList;
+    }
+
+    private ReviewUserResDto entityToUserDto(Review review){
+        return new ReviewUserResDto(review.getId(),review.getTitle(),review.getRate()
+                ,review.getContent(),review.getProduct().getId());
     }
 }
