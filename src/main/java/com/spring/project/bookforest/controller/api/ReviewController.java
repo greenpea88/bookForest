@@ -1,5 +1,6 @@
 package com.spring.project.bookforest.controller.api;
 
+import com.spring.project.bookforest.dto.ReviewUpdateReqDto;
 import com.spring.project.bookforest.dto.ReviewWriteReqDto;
 import com.spring.project.bookforest.service.ReviewService;
 import lombok.RequiredArgsConstructor;
@@ -19,9 +20,9 @@ public class ReviewController {
     }
 
     //리뷰 수정
-    @PutMapping("/modify_review")
-    public void modifyReview(){
-
+    @PutMapping("/update_review")
+    public void updateReview(@RequestBody ReviewUpdateReqDto reqDto){
+        reviewService.updateReview(reqDto);
     }
 
     //리뷰 삭제

@@ -44,4 +44,12 @@ public class Review {
         this.user = user;
         this.product = product;
     }
+
+    public void update(String title, int rate, String content){
+        this.title = title;
+        this.rate = rate;
+        this.content = content;
+
+        this.updatedAt = LocalDateTime.now();
+    }
 }

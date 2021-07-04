@@ -6,6 +6,7 @@ import com.spring.project.bookforest.domain.entity.User;
 import com.spring.project.bookforest.domain.repository.ProductRepository;
 import com.spring.project.bookforest.domain.repository.ReviewRepository;
 import com.spring.project.bookforest.domain.repository.UserRepository;
+import com.spring.project.bookforest.dto.ReviewUpdateReqDto;
 import com.spring.project.bookforest.dto.ReviewWriteReqDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,11 +22,16 @@ public class ReviewService {
     public void writeReview(ReviewWriteReqDto reqDto){
         //TODO: review title 10자 이하 예외처리
         User user = userRepository.findByEmail(reqDto.getUserEmail());
-        System.out.println(user);
         Product product = productRepository.findById(reqDto.getProductId()).orElse(null);
-        System.out.println(product);
 
         reviewRepository.save(Review.builder().title(reqDto.getTitle()).rate(reqDto.getRate())
                 .content(reqDto.getContent()).user(user).product(product).build());
+    }
+
+    public void updateReview(ReviewUpdateReqDto reqDto){
+        Review review = reviewRepository.findById(reqDto.getId()).orElse(null);
+        review.update(reqDto.getTitle(),reqDto.getRate(),reqDto.getContent());
+
+        reviewRepository.save(review);
     }
 }
