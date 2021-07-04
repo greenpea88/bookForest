@@ -1,6 +1,7 @@
 package com.spring.project.bookforest.domain.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -33,4 +34,14 @@ public class Review {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id")
     private Product product;
+
+    @Builder
+    public Review(String title, int rate, String content, User user, Product product){
+        this.title = title;
+        this.rate = rate;
+        this.content = content;
+
+        this.user = user;
+        this.product = product;
+    }
 }
