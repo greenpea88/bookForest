@@ -9,4 +9,5 @@ import java.util.List;
 public interface ReviewRepository extends JpaRepository<Review,Long> {
 
     List<Review> findAllByUserEmailAndDeletedFalse(Pageable pageable, String email);
+    List<Review> findAllByProductIdAndDeletedFalse(Pageable pageable, Long id);
 }

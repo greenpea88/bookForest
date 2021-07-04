@@ -1,5 +1,6 @@
 package com.spring.project.bookforest.controller.api;
 
+import com.spring.project.bookforest.dto.ReviewProductResDto;
 import com.spring.project.bookforest.dto.ReviewUpdateReqDto;
 import com.spring.project.bookforest.dto.ReviewUserResDto;
 import com.spring.project.bookforest.dto.ReviewWriteReqDto;
@@ -42,7 +43,7 @@ public class ReviewController {
 
     //리뷰리스트 가져오기 - 물건
     @GetMapping("/get_productReviews")
-    public void getReviewProductList(){
-
+    public List<ReviewProductResDto> getReviewProductList(@RequestParam int page, @RequestParam Long productId){
+        return reviewService.getReviewProductList(page,productId);
     }
 }

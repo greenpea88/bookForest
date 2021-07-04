@@ -6,6 +6,7 @@ import com.spring.project.bookforest.domain.entity.User;
 import com.spring.project.bookforest.domain.repository.ProductRepository;
 import com.spring.project.bookforest.domain.repository.ReviewRepository;
 import com.spring.project.bookforest.domain.repository.UserRepository;
+import com.spring.project.bookforest.dto.ReviewProductResDto;
 import com.spring.project.bookforest.dto.ReviewUserResDto;
 import com.spring.project.bookforest.dto.ReviewUpdateReqDto;
 import com.spring.project.bookforest.dto.ReviewWriteReqDto;
@@ -58,8 +59,23 @@ public class ReviewService {
         return reviewUserResDtoList;
     }
 
+    public List<ReviewProductResDto> getReviewProductList(int page, Long productId){
+        PageRequest pageRequest = PageRequest.of(page, 5);
+        List<Review> result = reviewRepository.findAllByProductIdAndDeletedFalse(pageRequest, productId);
+
+        List<ReviewProductResDto> reviewProductResDtoList = new ArrayList<>();
+        for (Review r: result){
+            reviewProductResDtoList.add(entityToProductDto(r));
+        }
+        return reviewProductResDtoList;
+    }
+
     private ReviewUserResDto entityToUserDto(Review review){
         return new ReviewUserResDto(review.getId(),review.getTitle(),review.getRate()
                 ,review.getContent(),review.getProduct().getId());
+    }
+
+    private ReviewProductResDto entityToProductDto(Review review){
+        return new ReviewProductResDto(review.getId(),review.getTitle(),review.getRate(),review.getContent());
     }
 }
