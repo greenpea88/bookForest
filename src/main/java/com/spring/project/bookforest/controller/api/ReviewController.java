@@ -27,8 +27,8 @@ public class ReviewController {
 
     //리뷰 삭제
     @PutMapping("/delete_review")
-    public void deleteReview(){
-
+    public void deleteReview(@RequestParam Long id){
+        reviewService.deleteReview(id);
     }
 
     //리뷰 리스트 가져오기

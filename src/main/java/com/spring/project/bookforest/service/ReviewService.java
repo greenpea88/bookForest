@@ -34,4 +34,11 @@ public class ReviewService {
 
         reviewRepository.save(review);
     }
+
+    public void deleteReview(Long id){
+        Review review = reviewRepository.getById(id);
+        review.setDeleted(true);
+
+        reviewRepository.save(review);
+    }
 }
